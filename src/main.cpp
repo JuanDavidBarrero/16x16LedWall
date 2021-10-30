@@ -8,7 +8,9 @@
 AsyncWebServer server(80);
 
 const char *PARAM_INPUT = "img";
+const char *PARAM_INPUT_STATE = "active";
 String ledImg;
+bool status = false;
 
 void initSPIFFS();
 void initWiFi();
@@ -26,9 +28,10 @@ void setup()
 
   server.on("/change", HTTP_GET, [](AsyncWebServerRequest *request)
             {
-              if (request->hasParam(PARAM_INPUT))
+              if (request->hasParam(PARAM_INPUT) && request->hasParam(PARAM_INPUT_STATE))
               {
                 ledImg = request->getParam(PARAM_INPUT)->value();
+                status = request->getParam(PARAM_INPUT_STATE)->value();
                 Serial.println(ledImg);
               }
 
@@ -40,18 +43,23 @@ void setup()
 
 void loop()
 {
-  switch (ledImg.toInt())
+  if (status)
   {
-  case 1:
-    Serial.println("Poner imagen de alien");
-    break;
-  case 2:
-    Serial.println("poner la segunda imagen aca");
-    break; 
-  
-  default:
-    // Serial.println("Este caso no esta contemplado");
-    break;
+    switch (ledImg.toInt())
+    {
+    case 1:
+      Serial.println("Poner imagen de alien");
+      break;
+    case 2:
+      Serial.println("poner la segunda imagen aca");
+      break;
+
+    default:
+      // Serial.println("Este caso no esta contemplado");
+      break;
+    }
+    status = false;
+    Serial.println("\nSalio del swithc");
   }
 }
 
