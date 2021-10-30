@@ -1,0 +1,72 @@
+@font-face{
+    font-family:'halloween';
+    src: url('HalloweenMorning.ttf');
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'halloween';
+}
+
+body{
+    
+    height: 80vh;
+    background-color: #202020;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+h1{
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+    letter-spacing: 2px;
+    color: #C52500;
+    margin-bottom: 40px;
+}
+
+.card{
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+select{
+    background-color: #747474;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    height: 50px;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 1px 1px 10px 10px #640f0f3b;
+    text-transform: uppercase;
+    width: 300px;
+}
+
+button{
+    align-items: center;
+    letter-spacing: 5px;
+    width: 150px;
+    border: 1px solid #C52500;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px 30px;
+    color: #C52500;
+    background-color: rgb(26, 26, 26);
+}
+
+button:active{
+    transform: scale(.96);
+}
+
+button:focus{
+    outline: none;
+}
