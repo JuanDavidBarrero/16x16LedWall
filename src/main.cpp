@@ -22,7 +22,14 @@ void initWiFi();
 void setup()
 {
   Serial.begin(115200);
+
+  pinMode(2, OUTPUT);
+  digitalWrite(2, 0);
+
   initWiFi();
+
+  digitalWrite(2, 1);
+
   initSPIFFS();
   initNeoPixel();
 
@@ -37,7 +44,6 @@ void setup()
               {
                 ledImg = request->getParam(PARAM_INPUT)->value();
                 status = request->getParam(PARAM_INPUT_STATE)->value();
-                Serial.println(ledImg);
               }
 
               request->send(200, "text/plain", "OK");
@@ -57,6 +63,21 @@ void loop()
       break;
     case 2:
       showSpiderman();
+      break;
+    case 3:
+      showGhost();
+      break;
+    case 4:
+      showGrave();
+      break;
+    case 5:
+      showBatman();
+      break;
+    case 6:
+      showSkull();
+      break;
+    case 7:
+      showAll();
       break;
 
     default:
