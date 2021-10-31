@@ -5,17 +5,9 @@
 #include <ESPAsyncWebServer.h>
 #include "SPIFFS.h"
 
-#include <Adafruit_NeoPixel.h> 
 #include <figureRGB.h>
 
 #include "credentials.h"
-
-#define pin_NEO 4
-
-const int brightness = 10;
-const int nleds = 256;
-
-Adafruit_NeoPixel pixels = Adafruit_NeoPixel(nleds,pin_NEO, NEO_RGB +  NEO_KHZ800);
 
 const char *PARAM_INPUT = "img";
 const char *PARAM_INPUT_STATE = "active";
@@ -23,7 +15,6 @@ String ledImg;
 bool status = false;
 
 AsyncWebServer server(80);
-
 
 void initSPIFFS();
 void initWiFi();
@@ -33,11 +24,7 @@ void setup()
   Serial.begin(115200);
   initWiFi();
   initSPIFFS();
-
-  pixels.begin();
-  pixels.clear();
-  pixels.show();
-  pixels.setBrightness(brightness);
+  initNeoPixel();
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(SPIFFS, "/index.html", "text/html", false); });
@@ -66,18 +53,16 @@ void loop()
     switch (ledImg.toInt())
     {
     case 1:
-      Serial.println("Poner imagen de alien");
+      showAlien();
       break;
     case 2:
-      Serial.println("poner la segunda imagen aca");
+      showSpiderman();
       break;
 
     default:
-      // Serial.println("Este caso no esta contemplado");
       break;
     }
     status = false;
-    Serial.println("\nSalio del swithc");
   }
 }
 
