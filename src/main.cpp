@@ -22,7 +22,6 @@ void initWiFi();
 void setup()
 {
   Serial.begin(115200);
-  
 
   pinMode(2, OUTPUT);
   digitalWrite(2, 0);
@@ -30,8 +29,18 @@ void setup()
   initWiFi();
 
   digitalWrite(2, 1);
+  delay(100);
+  digitalWrite(2, 0);
+  delay(100);
+  digitalWrite(2, 1);
+  delay(100);
+  digitalWrite(2, 0);
+  delay(100);
+  digitalWrite(2, 1);
+  delay(100);
 
   initSPIFFS();
+  starOTA();
   initNeoPixel();
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -86,7 +95,7 @@ void loop()
     }
     status = false;
   }
-  
+
   actualizarOTA();
 }
 
