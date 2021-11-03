@@ -5,8 +5,8 @@
 #include <ESPAsyncWebServer.h>
 #include "SPIFFS.h"
 
+#include <otahelp.h>
 #include <figureRGB.h>
-
 #include "credentials.h"
 
 const char *PARAM_INPUT = "img";
@@ -22,6 +22,7 @@ void initWiFi();
 void setup()
 {
   Serial.begin(115200);
+  
 
   pinMode(2, OUTPUT);
   digitalWrite(2, 0);
@@ -85,6 +86,8 @@ void loop()
     }
     status = false;
   }
+  
+  actualizarOTA();
 }
 
 void initSPIFFS()
